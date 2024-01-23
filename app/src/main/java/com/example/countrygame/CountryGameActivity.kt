@@ -16,13 +16,13 @@ class CountryGameActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.txtLabel.text = "Test success"
-
         val app = application as MyApplication
         viewModel = ViewModelProvider(this, CountryViewModelFactory(app.repository))
             .get(CountryGameViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.getSubjectInfo("africa", "300", true)
     }
 }
