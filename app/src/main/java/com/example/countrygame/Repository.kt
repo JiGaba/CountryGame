@@ -1,4 +1,6 @@
 package com.example.countrygame
 
-class Repository(private val apiService) {
+import com.example.countrygame.api.CountryApiService
+
+class Repository(private val apiService: CountryApiService) {
 }
