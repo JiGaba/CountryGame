@@ -18,7 +18,8 @@ class CountryGameActivity : AppCompatActivity() {
 
         binding.txtLabel.text = "Test success"
 
-        viewModel = ViewModelProvider(this)
+        val app = application as MyApplication
+        viewModel = ViewModelProvider(this, CountryViewModelFactory(app.repository))
             .get(CountryGameViewModel::class.java)
     }
 }
