@@ -21,5 +21,8 @@ class CountryGameActivity : AppCompatActivity() {
         val app = application as MyApplication
         viewModel = ViewModelProvider(this, CountryViewModelFactory(app.repository))
             .get(CountryGameViewModel::class.java)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 }
