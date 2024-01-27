@@ -1,7 +1,7 @@
 package com.example.countrygame
 
 import com.example.countrygame.api.CountryApiService
-import com.example.countrygame.model.CountryInfo
+import com.example.countrygame.domain.CountryInfo
 
 class Repository(private val apiService: CountryApiService) {
     suspend fun getCountryInfo(

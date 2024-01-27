@@ -1,6 +1,6 @@
 package com.example.countrygame.api
 
-import com.example.countrygame.model.CountryInfo
+import com.example.countrygame.domain.CountryInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

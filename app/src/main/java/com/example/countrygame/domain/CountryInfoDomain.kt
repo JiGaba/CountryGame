@@ -1,4 +1,4 @@
-package com.example.countrygame.model
+package com.example.countrygame.domain
 
 data class CountryInfo(
     val status: String,

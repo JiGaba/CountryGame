@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.countrygame.model.CountryInfo
+import com.example.countrygame.domain.CountryInfo
 import kotlinx.coroutines.launch
 
 class CountryGameViewModel(private val repository: Repository)
