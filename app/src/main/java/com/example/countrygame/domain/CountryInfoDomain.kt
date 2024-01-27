@@ -5,7 +5,7 @@ data class CountryInfo(
     val statusCode: Int,
     val version: String,
     val access: String,
-    val data: Map<String, CountryData>
+    val countries: List<CountryData>
 )
 
 data class CountryData(

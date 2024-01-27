@@ -15,5 +15,5 @@ interface CountryApiService {
         @Query("region") region: String,
         @Query("limit") limit: String,
         @Query("pretty") pretty: Boolean
-    ) : Response<CountryInfo>
+    ) : Response<CountryInfoNetwork>
 }
