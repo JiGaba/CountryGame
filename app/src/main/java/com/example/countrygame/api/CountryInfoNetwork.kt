@@ -1,5 +1,6 @@
 package com.example.countrygame.api
 
+import com.example.countrygame.database.CountryDataDTO
 import com.example.countrygame.domain.CountryData
 import com.example.countrygame.domain.CountryInfo
 
@@ -30,4 +31,14 @@ fun CountryInfoNetwork.mapToDomain(): CountryInfo {
         access = this.access,
         countries = countryList
     )
+}
+
+fun CountryInfoNetwork.mapToDTOList(): List<CountryDataDTO> {
+    val countryList = mutableListOf<CountryDataDTO>()
+
+    this.data.forEach { (countryCode, countryData) ->
+        countryList.add(CountryDataDTO(countryData.country, countryData.region))
+    }
+
+    return countryList
 }
