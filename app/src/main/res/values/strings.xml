@@ -9,4 +9,6 @@
     <string name="radioJizniAmerika">Jižní Amerika</string>
     <string name="radioStredniAmerika">Střední Amerika</string>
     <string name="radioSeverniAmerika">Severní Amerika</string>
+    <string name="StartPagePopis">Vyberte kontinenty, které chcete procvičovat</string>
+    <string name="buttonStart">START</string>
 </resources>
