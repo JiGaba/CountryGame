@@ -26,9 +26,6 @@ fun CountryInfoNetwork.mapToDomain(): CountryInfo {
 
     return CountryInfo(
         status = this.status,
-        statusCode = this.statusCode,
-        version = this.version,
-        access = this.access,
         countries = countryList
     )
 }

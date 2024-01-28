@@ -24,9 +24,6 @@ fun List<CountryDataDTO>.mapToDomain() : CountryInfo{
 
     return CountryInfo(
         status = "DB",
-        statusCode = 0,
-        version = "",
-        access = "",
         countries = countryList
     )
 }
