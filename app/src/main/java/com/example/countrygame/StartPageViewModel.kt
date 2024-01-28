@@ -7,6 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class StartPageViewModel : ViewModel() {
+    private val _showDialog = MutableLiveData<Boolean>()
+    // Veřejná LiveData pro přístup z aktivity
+    val showDialog: LiveData<Boolean>
+        get() = _showDialog
+
+    // Metoda pro změnu hodnoty proměnné
+    fun setShowDialog(newValue: Boolean) {
+        _showDialog.value = newValue
+    }
+
     val checkBoxList: List<ObservableBoolean> = List(8) {
         ObservableBoolean(false)
     }
@@ -20,9 +30,8 @@ class StartPageViewModel : ViewModel() {
         }
 
         if(checkBoxCheckedCount <= 1)
-            // dialog
-
-        Log.v("count: ", checkBoxCheckedCount.toString())
+            _showDialog.value = true
+            //Log.v("count: ", checkBoxCheckedCount.toString())
         Log.d("MyViewModel ", checkBoxList[0].get().toString())
         Log.d("MyViewModel JA ", checkBoxList[1].get().toString())
 
