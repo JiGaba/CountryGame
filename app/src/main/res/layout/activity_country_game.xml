@@ -12,17 +12,121 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CountryGameActivity">
+        tools:context=".CountryGameActivity"
+        tools:ignore="ExtraText">
 
         <TextView
-            android:id="@+id/txtLabel"
+            android:id="@+id/txtZadani"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{ viewModel.countryInfoValue.status }"
+            android:text="@string/zadani_otazky"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.072" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="TextView"
+            android:textColor="#3F51B5"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtZadani" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <RadioButton
+                android:id="@+id/radioButtonAfrica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radioAfrika"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonAsia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioAsie"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonAntarctic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioAntarktida"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonEurope"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioEvropa"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOceania"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioOceanie"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonSouthAmerica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioJizniAmerika"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonCentralAmerica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioStredniAmerika"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonNorthAmerica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/radioSeverniAmerika"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

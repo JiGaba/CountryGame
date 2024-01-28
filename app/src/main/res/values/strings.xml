@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CountryGame</string>
+    <string name="zadani_otazky">Na kterém kontinentu leží tento stát:</string>
+    <string name="radioAfrika">Afrika</string>
+    <string name="radioAsie">Ásie</string>
+    <string name="radioAntarktida">Antarktida</string>
+    <string name="radioEvropa">Evropa</string>
+    <string name="radioOceanie">Oceánie</string>
+    <string name="radioJizniAmerika">Jižní Amerika</string>
+    <string name="radioStredniAmerika">Střední Amerika</string>
+    <string name="radioSeverniAmerika">Severní Amerika</string>
 </resources>

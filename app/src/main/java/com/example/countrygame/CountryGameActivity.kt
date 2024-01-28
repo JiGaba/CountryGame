@@ -2,6 +2,8 @@ package com.example.countrygame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
 
@@ -27,5 +29,8 @@ class CountryGameActivity : AppCompatActivity() {
         regions.add("africa")
         regions.add("europe")
         viewModel.getSubjectInfo(regions, "300", true)
+
+        //val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
+        //binding.radioGroup.removeView(radioButtonToRemove)
     }
 }
