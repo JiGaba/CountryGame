@@ -2,24 +2,38 @@ package com.example.countrygame
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.countrygame.databinding.ActivityCountryGameBinding
+import androidx.lifecycle.viewModelScope
+import com.example.countrygame.databinding.ActivityStartPageBinding
 
 class StartPageActivity : AppCompatActivity() {
-    private  lateinit var binding: ActivityCountryGameBinding
+    private  lateinit var binding: ActivityStartPageBinding
+    private lateinit var viewModel: StartPageViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_page)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        binding = ActivityCountryGameBinding.inflate(layoutInflater)
+        binding = ActivityStartPageBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        viewModel = ViewModelProvider(this).get(StartPageViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        //val myButton: Button = findViewById(R.id.buttonStart)
         /*
-        binding = ActivityCountryGameBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        myButton.setOnClickListener {
+            // Call the method when the button is clicked
+            startGame()
+        }
+
+         */
+        /*
 
         val app = application as MyApplication
         viewModel = ViewModelProvider(this, CountryViewModelFactory(app.repository))
@@ -35,5 +49,10 @@ class StartPageActivity : AppCompatActivity() {
         */
         //val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
         //binding.radioGroup.removeView(radioButtonToRemove)
+    }
+
+    fun startGame(){
+        Log.v("Test", "testdata")
+        //viewModel.
     }
 }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.countrygame.StartPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/radioAfrika"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(1)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -38,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioAsie"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(2)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxAfrika" />
@@ -48,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioAntarktida"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(3)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxAsie" />
@@ -58,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioEvropa"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(4)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxAntarktida" />
@@ -68,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioOceanie"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(5)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxEvropa" />
@@ -78,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioJizniAmerika"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(6)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxOceanie" />
@@ -88,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioStredniAmerika"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(7)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxJAmerika" />
@@ -98,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/radioSeverniAmerika"
+            android:onClick="@{() -> viewModel.onCheckBoxClicked(8)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxCentAmerika" />
@@ -109,6 +119,7 @@
             android:layout_marginBottom="20dp"
             android:text="@string/buttonStart"
             android:textSize="20sp"
+            android:onClick="@{ () -> viewModel.onButtonStartClick() }"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

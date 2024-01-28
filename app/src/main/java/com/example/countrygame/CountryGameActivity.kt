@@ -3,7 +3,9 @@ package com.example.countrygame
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
@@ -34,5 +36,17 @@ class CountryGameActivity : AppCompatActivity() {
 
         //val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
         //binding.radioGroup.removeView(radioButtonToRemove)
+        /*
+        val myButton: Button = findViewById(R.id.buttonSubmit)
+        myButton.setOnClickListener {
+            // Call the method when the button is clicked
+            test()
+        }
+
+         */
+    }
+
+    fun test(){
+        Log.v("jsdjsd", "sasfds")
     }
 }
