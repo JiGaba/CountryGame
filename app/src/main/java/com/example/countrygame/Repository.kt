@@ -16,7 +16,7 @@ class Repository(
     private val database: MyRoomDatabase
     ) {
     suspend fun getCountryInfo(
-        region: String, limit: String, pretty: Boolean) : CountryInfo? {
+        regions: List<String>, limit: String, pretty: Boolean) : CountryInfo? {
         /*val response = apiService.getCountryInfo(region, limit, pretty)
 
         if(response.isSuccessful){
@@ -26,17 +26,17 @@ class Repository(
             return  null
         }*/
         // get data from REST API and cache them to DB
-        refreshCountries(region, limit, pretty)
+        refreshCountries(regions, limit, pretty)
 
         // return FLOW of SubjectInfoDomain from database to ViewModel
         return database.countryDataDao.getAllCountryData().mapToDomain()
             //.map { it.mapToDomain() }
     }
 
-    suspend fun refreshCountries(region: String, limit: String, pretty: Boolean) {
+    suspend fun refreshCountries(regions: List<String>, limit: String, pretty: Boolean) {
         try {
             // call REST API service to response
-            val apiResponse = apiService.getCountryInfo(region, limit, pretty)
+            val apiResponse = apiService.getCountryInfo(regions.elementAt(0), limit, pretty)
             // parse SubjectInfoNetwork from response body
             val countryInfoNetwork: CountryInfoNetwork? = apiResponse.body()
 

@@ -12,9 +12,9 @@ class CountryGameViewModel(private val repository: Repository)
 
     private val _countryInfoValue = MutableLiveData<CountryInfo>()
     val countryInfoValue: LiveData<CountryInfo> = _countryInfoValue
-    fun getSubjectInfo(region: String, limit: String, pretty: Boolean){
+    fun getSubjectInfo(regions: List<String>, limit: String, pretty: Boolean){
         viewModelScope.launch {
-            val result = repository.getCountryInfo(region, limit, pretty)
+            val result = repository.getCountryInfo(regions, limit, pretty)
             _countryInfoValue.postValue(result)
         }
     }
