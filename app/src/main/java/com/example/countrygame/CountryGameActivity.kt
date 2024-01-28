@@ -31,12 +31,7 @@ class CountryGameActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        /*
-        var regions : MutableList<String> = mutableListOf()
-        regions.add("africa")
-        regions.add("europe")
 
-         */
         removeUnusedRadio(setupData)
         viewModel.getSubjectInfo(setupData, "300", true)
     }
@@ -62,6 +57,34 @@ class CountryGameActivity : AppCompatActivity() {
                 when(r){
                     "africa" -> {
                         val radioButtonToRemove: View = findViewById(R.id.radioButtonAfrica)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "asia" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonAsia)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "antarctic" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonAntarctic)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "europe" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonEurope)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "oceania" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonOceania)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "south america" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonSouthAmerica)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "central america" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                    "north america" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonNorthAmerica)
                         binding.radioGroup.removeView(radioButtonToRemove)
                     }
                 }
