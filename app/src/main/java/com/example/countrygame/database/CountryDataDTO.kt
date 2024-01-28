@@ -14,14 +14,6 @@ data class CountryDataDTO (
     val country: String,
     val region: String
 )
-/*
-fun CountryDataDTO.mapToDomain() : CountryData{
-    return CountryData(
-        country = this.country,
-        region = this.region
-    )
-}
-*/
 
 fun List<CountryDataDTO>.mapToDomain() : CountryInfo{
     val countryList = mutableListOf<CountryData>()

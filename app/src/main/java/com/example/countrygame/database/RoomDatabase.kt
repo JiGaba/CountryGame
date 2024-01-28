@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.Flow
 interface CountryDataDao {
     @Query("SELECT * FROM country_data")
     suspend fun getAllCountryData(): List<CountryDataDTO>
+    @Query("SELECT COUNT(1) FROM country_data")
+    suspend fun getDataCount(): Int
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(countryData: CountryDataDTO)
 

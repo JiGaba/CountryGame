@@ -19,24 +19,25 @@ class Repository(
     ) {
     suspend fun getCountryInfo(
         regions: List<String>, limit: String, pretty: Boolean) : CountryInfo? {
-        /*val response = apiService.getCountryInfo(region, limit, pretty)
 
-        if(response.isSuccessful){
-            val countryInfoNetwork = response.body()
-            return  countryInfoNetwork?.mapToDomain()
-        }else{
-            return  null
-        }*/
-        // get data from REST API and cache them to DB
-        refreshCountries(regions, limit, pretty)
+        // check number of elements in DB
+        val dataCount: Int
+        withContext(Dispatchers.IO) {
+            dataCount = database.countryDataDao.getDataCount()
+        }
 
-        // return FLOW of SubjectInfoDomain from database to ViewModel
+        // load data from REST API and cache them to DB
+        // load only if not exists in database
+        if(dataCount != Regions.STATES_COUNT)
+            refreshCountries(regions, limit, pretty)
+
+        // return object from database to ViewModel
         return database.countryDataDao.getAllCountryData().mapToDomain()
-            //.map { it.mapToDomain() }
     }
 
     suspend fun refreshCountries(regions: List<String>, limit: String, pretty: Boolean) {
         try {
+
             // call REST API service to response
             // load all country
             val completeResponse = loadAllCountry(limit, pretty)
