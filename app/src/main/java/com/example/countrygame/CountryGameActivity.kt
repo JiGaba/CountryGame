@@ -27,6 +27,7 @@ class CountryGameActivity : AppCompatActivity() {
         // Antarctic, Europe
         var regions : MutableList<String> = mutableListOf()
         regions.add("africa")
+        regions.add("europe")
         viewModel.getSubjectInfo(regions, "300", true)
     }
 }

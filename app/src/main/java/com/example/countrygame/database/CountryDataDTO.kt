@@ -28,7 +28,6 @@ fun List<CountryDataDTO>.mapToDomain() : CountryInfo{
 
     this.forEach { c ->
         countryList.add(CountryData(c.country, c.region))
-        Log.v("Pokus", c.country)
     }
 
     return CountryInfo(

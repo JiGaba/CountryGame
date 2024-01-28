@@ -9,7 +9,7 @@ data class CountryInfoNetwork(
     val statusCode: Int,
     val version: String,
     val access: String,
-    val data: Map<String, CountryDataNetwork>
+    var data: Map<String, CountryDataNetwork>
 )
 
 data class CountryDataNetwork(
