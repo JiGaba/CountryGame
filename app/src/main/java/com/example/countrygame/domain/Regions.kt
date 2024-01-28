@@ -14,14 +14,14 @@ class Regions {
         const val CENTRAL_AMERICA = "central america"
 
         val getRegionList: List<String> = listOf(
-            "central america"
-            ,"south america"
-            ,"north america"
-            ,"oceania"
+            "africa"
             ,"asia"
-            ,"africa"
             ,"antarctic"
             ,"europe"
+            ,"oceania"
+            ,"south america"
+            ,"central america"
+            ,"north america"
         )
     }
 }

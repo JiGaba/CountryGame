@@ -1,5 +1,6 @@
 package com.example.countrygame
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.countrygame.databinding.ActivityStartPageBinding
+import com.example.countrygame.domain.Regions
 
 class StartPageActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityStartPageBinding
@@ -29,51 +31,32 @@ class StartPageActivity : AppCompatActivity() {
 
         viewModel.showDialog.observe(this, Observer { d ->
             // Zde provedete akce při změně hodnoty proměnné
+            //Log.v("hoppp", "hop")
             if(d) showAlertDialog()
-            //viewModel.setShowDialog(false)
-            /*
-            if (newValue) {
-                // Akce pro případ, kdy je proměnná true
-                Log.d("YourActivity", "Proměnná je nastavena na true")
-            } else {
-                // Akce pro případ, kdy je proměnná false
-                Log.d("YourActivity", "Proměnná je nastavena na false")
-            }*/
         })
-/*
-        binding.buttonStart.setOnClickListener {
-            // Zavolání metody ve ViewModelu při kliknutí na tlačítko
 
-            Log.v("OK?", "")
-            // Zobrazení alertu
-            showAlertDialog()
-            viewModel.onButtonStartClick()
-        }
-*/
-        //val myButton: Button = findViewById(R.id.buttonStart)
-        /*
-        myButton.setOnClickListener {
-            // Call the method when the button is clicked
-            startGame()
-        }
+        viewModel.showGame.observe(this, Observer { g ->
+            // Zde provedete akce při změně hodnoty proměnné
+            //Log.v("hoppp", "")
+            if(g){
+                var index = 0
+                val continentList: MutableList<String> = mutableListOf()
 
-         */
-        /*
+                // získání kontinentů pro nastavení hry
+                viewModel.checkBoxList.forEach{l ->
+                    if(l.get()){
+                        continentList.add(Regions.getRegionList[index])
+                    }
+                    index++
+                }
 
-        val app = application as MyApplication
-        viewModel = ViewModelProvider(this, CountryViewModelFactory(app.repository))
-            .get(CountryGameViewModel::class.java)
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
-        var regions : MutableList<String> = mutableListOf()
-        regions.add("africa")
-        regions.add("europe")
-        viewModel.getSubjectInfo(regions, "300", true)
-        */
-        //val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
-        //binding.radioGroup.removeView(radioButtonToRemove)
+                val stringArray: Array<String?> = continentList.toTypedArray()
+                val intent = Intent(this, CountryGameActivity::class.java)
+                intent.putExtra("setupData", stringArray)
+                startActivity(intent)
+                viewModel.setShowGame(false)
+            }
+        })
     }
 
     private fun showAlertDialog() {

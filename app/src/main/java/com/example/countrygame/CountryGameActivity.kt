@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
+import com.example.countrygame.domain.Regions
 
 class CountryGameActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityCountryGameBinding
@@ -17,6 +18,8 @@ class CountryGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_game)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        val setupData = loadIntentData()
 
         binding = ActivityCountryGameBinding.inflate(layoutInflater)
         val view = binding.root
@@ -28,25 +31,42 @@ class CountryGameActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        /*
         var regions : MutableList<String> = mutableListOf()
         regions.add("africa")
         regions.add("europe")
-        viewModel.getSubjectInfo(regions, "300", true)
-
-        //val radioButtonToRemove: View = findViewById(R.id.radioButtonCentralAmerica)
-        //binding.radioGroup.removeView(radioButtonToRemove)
-        /*
-        val myButton: Button = findViewById(R.id.buttonSubmit)
-        myButton.setOnClickListener {
-            // Call the method when the button is clicked
-            test()
-        }
 
          */
+        removeUnusedRadio(setupData)
+        viewModel.getSubjectInfo(setupData, "300", true)
     }
 
-    fun test(){
-        Log.v("jsdjsd", "sasfds")
+    fun loadIntentData() : List<String>{
+        // Příjem pole z Intentu
+        val receivedStringArray = intent.getStringArrayExtra("setupData")
+
+        // Zkontrolujte, zda bylo pole úspěšně přijato
+        if (receivedStringArray != null) {
+            Log.v("CountryGameActivity", "Příjem v pořádku")
+        } else {
+            Log.e("CountryGameActivity", "Chyba při přijímání pole")
+        }
+
+        return receivedStringArray?.filterNotNull() ?: emptyList()
+    }
+
+    fun removeUnusedRadio(setupData: List<String>){
+        //val isStringInList: Boolean = setupData.any { it.equals("dd", ignoreCase = true) }
+        Regions.getRegionList.forEach{r ->
+            if(!setupData.any { it.equals(r, ignoreCase = true) }){
+                when(r){
+                    "africa" -> {
+                        val radioButtonToRemove: View = findViewById(R.id.radioButtonAfrica)
+                        binding.radioGroup.removeView(radioButtonToRemove)
+                    }
+                }
+            }
+        }
+
     }
 }
