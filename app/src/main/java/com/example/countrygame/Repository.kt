@@ -8,6 +8,7 @@ import com.example.countrygame.api.mapToDomain
 import com.example.countrygame.database.MyRoomDatabase
 import com.example.countrygame.database.mapToDomain
 import com.example.countrygame.domain.CountryInfo
+import com.example.countrygame.domain.Regions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -37,7 +38,8 @@ class Repository(
     suspend fun refreshCountries(regions: List<String>, limit: String, pretty: Boolean) {
         try {
             // call REST API service to response
-            val completeResponse = loadAllCountry(regions, limit, pretty)
+            // load all country
+            val completeResponse = loadAllCountry(limit, pretty)
             val countryInfoNetwork: CountryInfoNetwork? = completeResponse?.body()
 
             if(countryInfoNetwork != null) {
@@ -58,14 +60,14 @@ class Repository(
         }
     }
 
-    suspend fun loadAllCountry(regions: List<String>, limit: String, pretty: Boolean) : Response<CountryInfoNetwork>?{
-
+    suspend fun loadAllCountry(limit: String, pretty: Boolean) : Response<CountryInfoNetwork>?{
+        val regions = Regions.getRegionList
         var completeResponse : Response<CountryInfoNetwork>? = null
         var index = 0
 
         regions.forEach{region ->
             var apiResponse = apiService.getCountryInfo(region, limit, pretty)
-            Log.v("delka pred ",completeResponse?.body()?.data?.count().toString())
+
             if(apiResponse.isSuccessful()){
                 if(index == 0){
                     index++
@@ -73,14 +75,11 @@ class Repository(
                 }else{
                     val tempNetwork: CountryInfoNetwork? = apiResponse.body()
                     val tempComplete : CountryInfoNetwork? = completeResponse?.body()
-                    Log.v("t1 ",tempNetwork?.data?.count().toString())
-                    Log.v("t2 ",tempComplete?.data?.count().toString())
+
                     if(tempNetwork != null && tempComplete != null)
                         completeResponse?.body()?.data = tempComplete.data + tempNetwork.data
                 }
             }
-
-            Log.v("delka ",completeResponse?.body()?.data?.count().toString())
         }
 
         return  completeResponse

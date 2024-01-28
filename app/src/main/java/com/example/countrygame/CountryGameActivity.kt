@@ -22,9 +22,7 @@ class CountryGameActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        // Central, south, north America
-        // Asia, Oceania, Africa
-        // Antarctic, Europe
+
         var regions : MutableList<String> = mutableListOf()
         regions.add("africa")
         regions.add("europe")
