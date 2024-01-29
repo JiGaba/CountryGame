@@ -1,13 +1,19 @@
 package com.example.countrygame
 
 import android.content.pm.ActivityInfo
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
@@ -59,52 +65,102 @@ class CountryGameActivity : AppCompatActivity() {
         // Vybrána odpověď
         viewModel.response.observe(this, Observer { d ->
             if(d){
-                /*
-                val countries = viewModel.countryInfoValue.value?.countries
-                if(countries != null){
-                    val filterValues = setupData
+                val selectedRegion: String = Regions.getRegionList.get(viewModel.responseNumber)
 
-                    _qameData = countries.filter { obj ->
-                        filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
+                if(selectedRegion.equals(_actualGameData.region, ignoreCase = true)){
+                    val myRadioButton = getRadioButtonByIndex(viewModel.responseNumber)
+                    setRadioButtonTextSucces(myRadioButton)
+                }else{
+                    var succesIndex: Int
+                    succesIndex = 0
+                    for ((i, value) in Regions.getRegionList.withIndex()) {
+                        if (value.equals(_actualGameData.region, ignoreCase = true)) {
+                            succesIndex = i
+                            break
+                        }
                     }
-                    getRandomCountry()
+                    val myRadioButtonSucces = getRadioButtonByIndex(succesIndex)
+                    val myRadioButtonFalse = getRadioButtonByIndex(viewModel.responseNumber)
+                    setRadioButtonTextSucces(myRadioButtonSucces)
+                    setRadioButtonTextFalse(myRadioButtonFalse)
                 }
-                */
-                //viewModel.
-                Log.v("response number ", viewModel.responseNumber.toString())
             }
         })
 
         // Uzamčení
         viewModel.lock.observe(this, Observer { l ->
             val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+            //radioGroup.clearCheck()
 
             if(l){
                 for (i in 0 until radioGroup.childCount) {
                     val radioButton = radioGroup.getChildAt(i) as? RadioButton
                     radioButton?.isEnabled = false
                 }
-                /*
-                val countries = viewModel.countryInfoValue.value?.countries
-                if(countries != null){
-                    val filterValues = setupData
-
-                    _qameData = countries.filter { obj ->
-                        filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
-                    }
-                    getRandomCountry()
-                }
-                */
-                //viewModel.
-                //Log.v("lock ", l.toString())
             }else{
                 for (i in 0 until radioGroup.childCount) {
                     val radioButton = radioGroup.getChildAt(i) as? RadioButton
                     radioButton?.isEnabled = true
                 }
-                //Log.v("lock ", l.toString())
             }
         })
+    }
+
+    fun getRadioButtonByIndex(index: Int) : RadioButton{
+        val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+
+        when(index){
+            0 -> {
+                return findViewById(R.id.radioButtonAfrica)
+            }
+            1 -> {
+                return findViewById(R.id.radioButtonAsia)
+            }
+            2 -> {
+                return findViewById(R.id.radioButtonAntarctic)
+            }
+            3 -> {
+                return findViewById(R.id.radioButtonEurope)
+            }
+            4 -> {
+                return findViewById(R.id.radioButtonOceania)
+            }
+            5 -> {
+                return findViewById(R.id.radioButtonSouthAmerica)
+            }
+            6 -> {
+                return findViewById(R.id.radioButtonCentralAmerica)
+            }
+            7 -> {
+                return findViewById(R.id.radioButtonNorthAmerica)
+            }
+        }
+        throw NullPointerException()
+    }
+
+
+    fun setRadioButtonTextSucces(myRadioButton: RadioButton){
+        myRadioButton.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        val text = myRadioButton.text.toString()
+
+        // Create a SpannableString to apply styles
+        val spannable = SpannableString(text)
+        // Apply the bold style to the entire text
+        spannable.setSpan(StyleSpan(Typeface.BOLD), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // Set the modified text to the RadioButton
+        myRadioButton.text = spannable
+    }
+
+    fun setRadioButtonTextFalse(myRadioButton: RadioButton){
+        myRadioButton.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
+        val text = myRadioButton.text.toString()
+
+        // Create a SpannableString to apply styles
+        val spannable = SpannableString(text)
+        // Apply the bold style to the entire text
+        spannable.setSpan(StyleSpan(Typeface.BOLD), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // Set the modified text to the RadioButton
+        myRadioButton.text = spannable
     }
 
     fun getRandomCountry(){

@@ -49,6 +49,7 @@ class CountryGameViewModel(private val repository: Repository)
         if(_guestionNumber == 0){
             _guestionNumber++
             _start.value = true
+            _lock.value = false
         }
     }
 
@@ -56,6 +57,7 @@ class CountryGameViewModel(private val repository: Repository)
         if(_start.value == true){
             responseNumber = index
             _response.value = true
+            _lock.value = true
         }
     }
 }
