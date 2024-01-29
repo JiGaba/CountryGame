@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -61,18 +61,18 @@
                 android:id="@+id/radioButtonAfrica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/radioAfrika"
+                android:layout_marginTop="5dp"
                 android:onClick="@{ () -> viewModel.radioClick(0)}"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp" />
+                android:text="@string/radioAfrika"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/radioButtonAsia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioAsie"
                 android:onClick="@{ () -> viewModel.radioClick(1)}"
+                android:text="@string/radioAsie"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -80,8 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioAntarktida"
                 android:onClick="@{ () -> viewModel.radioClick(2)}"
+                android:text="@string/radioAntarktida"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -89,8 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioEvropa"
                 android:onClick="@{ () -> viewModel.radioClick(3)}"
+                android:text="@string/radioEvropa"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -98,8 +98,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioOceanie"
                 android:onClick="@{ () -> viewModel.radioClick(4)}"
+                android:text="@string/radioOceanie"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -107,8 +107,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioJizniAmerika"
                 android:onClick="@{ () -> viewModel.radioClick(5)}"
+                android:text="@string/radioJizniAmerika"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -116,8 +116,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioStredniAmerika"
                 android:onClick="@{ () -> viewModel.radioClick(6)}"
+                android:text="@string/radioStredniAmerika"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -125,29 +125,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/radioSeverniAmerika"
                 android:onClick="@{ () -> viewModel.radioClick(7)}"
+                android:text="@string/radioSeverniAmerika"
                 android:textSize="20sp" />
         </RadioGroup>
 
         <Button
             android:id="@+id/buttonSubmit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="30dp"
             android:onClick="@{ () -> viewModel.checkButtonClick()}"
-            android:text="@string/buttonNext"
+            android:text="@string/buttonNext2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <Button
             android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/buttonBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSubmit" />
+
+        <TextView
+            android:id="@+id/scoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/buttonBack"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="25dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/txtZadani"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

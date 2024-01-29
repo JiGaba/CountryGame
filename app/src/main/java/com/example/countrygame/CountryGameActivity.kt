@@ -71,8 +71,9 @@ class CountryGameActivity : AppCompatActivity() {
                     val myRadioButton = getRadioButtonByIndex(viewModel.responseNumber)
                     setRadioButtonTextSucces(myRadioButton)
                 }else{
-                    var succesIndex: Int
-                    succesIndex = 0
+                    var succesIndex: Int = 0
+
+                    // Vyhledej správnou odpověď
                     for ((i, value) in Regions.getRegionList.withIndex()) {
                         if (value.equals(_actualGameData.region, ignoreCase = true)) {
                             succesIndex = i
@@ -103,6 +104,48 @@ class CountryGameActivity : AppCompatActivity() {
                     radioButton?.isEnabled = true
                 }
             }
+        })
+        // Nastav výchozí hodnoty
+        viewModel.doDefault.observe(this, Observer { d ->
+            if(d){
+                Log.v("Nastavení výchozích hodnot", "")
+
+                val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+                radioGroup.clearCheck()
+
+                for (i in 0 until radioGroup.childCount) {
+                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
+                    radioButton?.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+                    val text = radioButton?.text.toString()
+
+                    // Create a SpannableString to apply styles
+                    val spannable = SpannableString(text)
+                    // Apply the bold style to the entire text
+                    spannable.setSpan(StyleSpan(Typeface.NORMAL), 0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    // Set the modified text to the RadioButton
+                    radioButton?.text = spannable
+                }
+
+                getRandomCountry()
+                viewModel.setLock(false)
+                viewModel.setDoDefault(false)
+            }
+
+            /*
+            val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+            //radioGroup.clearCheck()
+
+            if(l){
+                for (i in 0 until radioGroup.childCount) {
+                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
+                    radioButton?.isEnabled = false
+                }
+            }else{
+                for (i in 0 until radioGroup.childCount) {
+                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
+                    radioButton?.isEnabled = true
+                }
+            }*/
         })
     }
 

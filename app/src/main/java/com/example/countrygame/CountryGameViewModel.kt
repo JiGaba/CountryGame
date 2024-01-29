@@ -14,10 +14,12 @@ class CountryGameViewModel(private val repository: Repository)
     private var _start = MutableLiveData<Boolean>()
     private var _lock = MutableLiveData<Boolean>()
     private var _response = MutableLiveData<Boolean>()
+    private var _doDefault = MutableLiveData<Boolean>()
     private var _guestionNumber = 0
     public var responseNumber = 0
     val start: LiveData<Boolean> get() = _start
     val lock: LiveData<Boolean> get() = _lock
+    val doDefault: LiveData<Boolean> get() = _doDefault
     val response: LiveData<Boolean> get() = _response
     private val _countryInfoValue = MutableLiveData<CountryInfo>()
     val countryInfoValue: LiveData<CountryInfo> = _countryInfoValue
@@ -35,6 +37,9 @@ class CountryGameViewModel(private val repository: Repository)
     fun setLock(value: Boolean) {
         _lock.value = value
     }
+    fun setDoDefault(value: Boolean) {
+        _doDefault.value = value
+    }
     fun getSubjectInfo(regions: List<String>, limit: String, pretty: Boolean){
         viewModelScope.launch {
             val result = repository.getCountryInfo(regions, limit, pretty)
@@ -50,6 +55,9 @@ class CountryGameViewModel(private val repository: Repository)
             _guestionNumber++
             _start.value = true
             _lock.value = false
+        }else{
+            _guestionNumber++
+            _doDefault.value = true
         }
     }
 
