@@ -81,7 +81,6 @@ class CountryGameViewModel(private val repository: Repository)
     }
 
     fun backButtonClick(){
-        Log.v("button click", "back to settings")
        _backToSetting.value = true
     }
 }
