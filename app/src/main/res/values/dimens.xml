@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_left">25</dimen>
+    <dimen name="padding_left2">25pt</dimen>
 </resources>

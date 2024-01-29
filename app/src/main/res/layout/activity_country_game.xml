@@ -32,8 +32,12 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="50dp"
-            android:text="TextView"
+            android:layout_marginEnd="50dp"
+            android:paddingLeft="@dimen/padding_left2"
+            android:paddingRight="@dimen/padding_left2"
+            android:text="@{ viewModel.actualCountry }"
             android:textColor="#3F51B5"
             android:textSize="34sp"
             android:textStyle="bold"
@@ -58,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/radioAfrika"
+                android:onClick="@{ () -> viewModel.radioClick(0)}"
                 android:textSize="20sp"
                 android:layout_marginTop="5dp" />
 
@@ -67,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioAsie"
+                android:onClick="@{ () -> viewModel.radioClick(1)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -75,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioAntarktida"
+                android:onClick="@{ () -> viewModel.radioClick(2)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -83,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioEvropa"
+                android:onClick="@{ () -> viewModel.radioClick(3)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -91,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioOceanie"
+                android:onClick="@{ () -> viewModel.radioClick(4)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -99,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioJizniAmerika"
+                android:onClick="@{ () -> viewModel.radioClick(5)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -107,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioStredniAmerika"
+                android:onClick="@{ () -> viewModel.radioClick(6)}"
                 android:textSize="20sp" />
 
             <RadioButton
@@ -115,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/radioSeverniAmerika"
+                android:onClick="@{ () -> viewModel.radioClick(7)}"
                 android:textSize="20sp" />
         </RadioGroup>
 
@@ -123,10 +135,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="Button"
+            android:onClick="@{ () -> viewModel.checkButtonClick()}"
+            android:text="@string/buttonNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/buttonBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

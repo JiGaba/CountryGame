@@ -7,13 +7,17 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
+import com.example.countrygame.domain.CountryData
 import com.example.countrygame.domain.Regions
 
 class CountryGameActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityCountryGameBinding
     private  lateinit var viewModel: CountryGameViewModel
+    private lateinit var _qameData: List<CountryData>
+    private  lateinit var _actualGameData: CountryData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_game)
@@ -34,6 +38,24 @@ class CountryGameActivity : AppCompatActivity() {
 
         removeUnusedRadio(setupData)
         viewModel.getSubjectInfo(setupData, "300", true)
+
+        // Začátek hry - načtení požadovaných dat dle setupMnožiny
+        viewModel.start.observe(this, Observer { d ->
+            if(d){
+                val countries = viewModel.countryInfoValue.value?.countries
+                if(countries != null){
+                    val filterValues = setupData
+
+                    _qameData = countries.filter { obj ->
+                        filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
+                    }
+                }
+            }
+        })
+    }
+
+    fun getRandomCountry(){
+
     }
 
     fun loadIntentData() : List<String>{

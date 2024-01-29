@@ -11,4 +11,6 @@
     <string name="radioSeverniAmerika">Severní Amerika</string>
     <string name="StartPagePopis">Vyberte kontinenty, které chcete procvičovat</string>
     <string name="buttonStart">START</string>
+    <string name="buttonNext">Další</string>
+    <string name="buttonBack"><![CDATA[< Zpět]]></string>
 </resources>

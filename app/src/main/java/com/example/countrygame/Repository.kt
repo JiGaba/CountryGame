@@ -37,7 +37,6 @@ class Repository(
 
     suspend fun refreshCountries(regions: List<String>, limit: String, pretty: Boolean) {
         try {
-
             // call REST API service to response
             // load all country
             val completeResponse = loadAllCountry(limit, pretty)
