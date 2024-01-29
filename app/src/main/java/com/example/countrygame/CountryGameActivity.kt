@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.countrygame.databinding.ActivityCountryGameBinding
 import com.example.countrygame.domain.CountryData
 import com.example.countrygame.domain.Regions
+import kotlin.random.Random
 
 class CountryGameActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityCountryGameBinding
@@ -49,13 +51,67 @@ class CountryGameActivity : AppCompatActivity() {
                     _qameData = countries.filter { obj ->
                         filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
                     }
+                    getRandomCountry()
                 }
+            }
+        })
+
+        // Vybrána odpověď
+        viewModel.response.observe(this, Observer { d ->
+            if(d){
+                /*
+                val countries = viewModel.countryInfoValue.value?.countries
+                if(countries != null){
+                    val filterValues = setupData
+
+                    _qameData = countries.filter { obj ->
+                        filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
+                    }
+                    getRandomCountry()
+                }
+                */
+                //viewModel.
+                Log.v("response number ", viewModel.responseNumber.toString())
+            }
+        })
+
+        // Uzamčení
+        viewModel.lock.observe(this, Observer { l ->
+            val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
+
+            if(l){
+                for (i in 0 until radioGroup.childCount) {
+                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
+                    radioButton?.isEnabled = false
+                }
+                /*
+                val countries = viewModel.countryInfoValue.value?.countries
+                if(countries != null){
+                    val filterValues = setupData
+
+                    _qameData = countries.filter { obj ->
+                        filterValues.any { filterValue -> obj.region.equals(filterValue, ignoreCase = true) }
+                    }
+                    getRandomCountry()
+                }
+                */
+                //viewModel.
+                //Log.v("lock ", l.toString())
+            }else{
+                for (i in 0 until radioGroup.childCount) {
+                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
+                    radioButton?.isEnabled = true
+                }
+                //Log.v("lock ", l.toString())
             }
         })
     }
 
     fun getRandomCountry(){
-
+        _actualGameData = _qameData.get(Random.nextInt(_qameData.count()))
+        viewModel.setActualCountry(_actualGameData.country)
+        Log.v("random country: ", _actualGameData.country)
+        Log.v("random region: ", _actualGameData.region)
     }
 
     fun loadIntentData() : List<String>{

@@ -12,8 +12,13 @@ class CountryGameViewModel(private val repository: Repository)
     : ViewModel() {
     private val _startInfo = "Hru zahájíte tlačítnem další..."
     private var _start = MutableLiveData<Boolean>()
+    private var _lock = MutableLiveData<Boolean>()
+    private var _response = MutableLiveData<Boolean>()
     private var _guestionNumber = 0
+    public var responseNumber = 0
     val start: LiveData<Boolean> get() = _start
+    val lock: LiveData<Boolean> get() = _lock
+    val response: LiveData<Boolean> get() = _response
     private val _countryInfoValue = MutableLiveData<CountryInfo>()
     val countryInfoValue: LiveData<CountryInfo> = _countryInfoValue
     private val _actualCountry = MutableLiveData<String>()
@@ -24,12 +29,19 @@ class CountryGameViewModel(private val repository: Repository)
     fun setStart(value: Boolean) {
         _start.value = value
     }
+    fun setResponse(value: Boolean) {
+        _response.value = value
+    }
+    fun setLock(value: Boolean) {
+        _lock.value = value
+    }
     fun getSubjectInfo(regions: List<String>, limit: String, pretty: Boolean){
         viewModelScope.launch {
             val result = repository.getCountryInfo(regions, limit, pretty)
             _countryInfoValue.postValue(result)
 
             _actualCountry.value = _startInfo
+            _lock.value = true
         }
     }
 
@@ -38,14 +50,12 @@ class CountryGameViewModel(private val repository: Repository)
             _guestionNumber++
             _start.value = true
         }
-        //Log.v("Teststs", "sdsdd")
-        //_actualCountry.value = _countryInfoValue.value?.countries?.get(0)?.country
     }
 
     fun radioClick(index: Int){
-
-
-        //Log.v("Teststs88888888", index.toString())
-        //_actualCountry.value = _countryInfoValue.value?.countries?.get(0)?.country
+        if(_start.value == true){
+            responseNumber = index
+            _response.value = true
+        }
     }
 }
