@@ -55,7 +55,7 @@ class CountryGameViewModel(private val repository: Repository)
             val result = repository.getCountryInfo(regions, limit, pretty)
             _countryInfoValue.postValue(result)
 
-            _score.value = "Score: 0"
+            _score.value = "Skóre: 0"
             _actualCountry.value = _startInfo
             _lock.value = true
         }

@@ -14,4 +14,5 @@
     <string name="buttonNext">Další</string>
     <string name="buttonBack"><![CDATA[< Zpět]]></string>
     <string name="buttonNext2">Další otázka</string>
+    <string name="backButton2">Zpět do menu</string>
 </resources>

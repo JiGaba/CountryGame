@@ -91,7 +91,7 @@ class CountryGameActivity : AppCompatActivity() {
                     setRadioButtonTextFalse(myRadioButtonFalse)
                     _score--
                 }
-                viewModel.setScore("Score: " + _score.toString())
+                viewModel.setScore("Skóre: " + _score.toString())
             }
         })
 
