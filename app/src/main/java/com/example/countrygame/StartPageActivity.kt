@@ -31,13 +31,11 @@ class StartPageActivity : AppCompatActivity() {
 
         viewModel.showDialog.observe(this, Observer { d ->
             // Zde provedete akce při změně hodnoty proměnné
-            //Log.v("hoppp", "hop")
             if(d) showAlertDialog()
         })
 
         viewModel.showGame.observe(this, Observer { g ->
             // Zde provedete akce při změně hodnoty proměnné
-            //Log.v("hoppp", "")
             if(g){
                 var index = 0
                 val continentList: MutableList<String> = mutableListOf()

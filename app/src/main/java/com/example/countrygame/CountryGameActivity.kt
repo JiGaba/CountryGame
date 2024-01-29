@@ -1,5 +1,6 @@
 package com.example.countrygame
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -16,16 +17,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.countrygame.databinding.ActivityCountryGameBinding
 import com.example.countrygame.domain.CountryData
 import com.example.countrygame.domain.Regions
 import kotlin.random.Random
 
 class CountryGameActivity : AppCompatActivity() {
-    private  lateinit var binding: ActivityCountryGameBinding
-    private  lateinit var viewModel: CountryGameViewModel
+    private lateinit var binding: ActivityCountryGameBinding
+    private lateinit var viewModel: CountryGameViewModel
     private lateinit var _qameData: List<CountryData>
-    private  lateinit var _actualGameData: CountryData
+    private lateinit var _actualGameData: CountryData
+    private var  _score: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_game)
@@ -45,6 +48,7 @@ class CountryGameActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         removeUnusedRadio(setupData)
+
         viewModel.getSubjectInfo(setupData, "300", true)
 
         // Začátek hry - načtení požadovaných dat dle setupMnožiny
@@ -70,6 +74,7 @@ class CountryGameActivity : AppCompatActivity() {
                 if(selectedRegion.equals(_actualGameData.region, ignoreCase = true)){
                     val myRadioButton = getRadioButtonByIndex(viewModel.responseNumber)
                     setRadioButtonTextSucces(myRadioButton)
+                    _score++
                 }else{
                     var succesIndex: Int = 0
 
@@ -84,14 +89,15 @@ class CountryGameActivity : AppCompatActivity() {
                     val myRadioButtonFalse = getRadioButtonByIndex(viewModel.responseNumber)
                     setRadioButtonTextSucces(myRadioButtonSucces)
                     setRadioButtonTextFalse(myRadioButtonFalse)
+                    _score--
                 }
+                viewModel.setScore("Score: " + _score.toString())
             }
         })
 
         // Uzamčení
         viewModel.lock.observe(this, Observer { l ->
             val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
-            //radioGroup.clearCheck()
 
             if(l){
                 for (i in 0 until radioGroup.childCount) {
@@ -130,22 +136,15 @@ class CountryGameActivity : AppCompatActivity() {
                 viewModel.setLock(false)
                 viewModel.setDoDefault(false)
             }
+        })
 
-            /*
-            val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
-            //radioGroup.clearCheck()
-
-            if(l){
-                for (i in 0 until radioGroup.childCount) {
-                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
-                    radioButton?.isEnabled = false
-                }
-            }else{
-                for (i in 0 until radioGroup.childCount) {
-                    val radioButton = radioGroup.getChildAt(i) as? RadioButton
-                    radioButton?.isEnabled = true
-                }
-            }*/
+        // zpět do setting
+        viewModel.backToSetting.observe(this, Observer { d ->
+            if(d){
+                val intent = Intent(this, StartPageActivity::class.java)
+                startActivity(intent)
+                viewModel.setBackToSetting(false)
+            }
         })
     }
 
@@ -228,7 +227,6 @@ class CountryGameActivity : AppCompatActivity() {
     }
 
     fun removeUnusedRadio(setupData: List<String>){
-        //val isStringInList: Boolean = setupData.any { it.equals("dd", ignoreCase = true) }
         Regions.getRegionList.forEach{r ->
             if(!setupData.any { it.equals(r, ignoreCase = true) }){
                 when(r){
